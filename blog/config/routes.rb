@@ -1,8 +1,17 @@
 Blog::Application.routes.draw do
-  resources :users, :user_sessions
+
+  resources :users
+  resources :user_sessions
+  resources :posts do
+	resources :comments
+  end
+  
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
+  root :to => "posts#index", :as => :homepage
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

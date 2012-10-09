@@ -1,0 +1,32 @@
+<h1>Listing posts</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>User</th>
+    <th></th>
+	<% if current_admin %>
+		<th></th>
+		<th></th>
+	<% end %>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%= post.title %></td>
+    <td><%= User.find(post.user).nick %></td>
+    <td><%= link_to 'Show', post %></td>
+	<% if current_admin %>
+		<td><%= link_to 'Edit', edit_post_path(post) %></td>
+		<td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if current_admin %>
+	<%= link_to 'New Post', new_post_path %>
+<% end %>
+

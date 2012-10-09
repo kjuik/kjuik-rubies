@@ -6,22 +6,26 @@
   <tr>
     <th>Nick</th>
     <th>Admin</th>
-    <th></th>
-    <th></th>
-    <th></th>
+   <% if current_admin %>
+		<th></th>
+		<th></th>
+	<% end %>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
     <td><%= user.nick %></td>
     <td><%= user.admin %></td>
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+	<% if current_admin %>
+		<td><%= link_to 'Edit', edit_user_path(user) %></td>
+		<td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New User', new_user_path %>
+<% if current_admin %>
+	<%= link_to 'New User', new_user_path %>
+<% end %>
