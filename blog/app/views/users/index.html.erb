@@ -1,31 +1,32 @@
-<h1>Listing users</h1>
+<h1>Users</h1>
 
-<p id="notice"><%= notice %></p>
+<% if current_admin %>
+	<div class="administer" style="text-align:right">
+		<%= link_to '[New]', new_user_path %>
+	</div>
+<% end %>
+
+<hr/>
 
 <table>
-  <tr>
-    <th>Nick</th>
-    <th>Admin</th>
-   <% if current_admin %>
-		<th></th>
-		<th></th>
-	<% end %>
-  </tr>
 
 <% @users.each do |user| %>
   <tr>
     <td><%= user.nick %></td>
-    <td><%= user.admin %></td>
+    <td>
+		<% if user.admin %>
+			<%= image_tag("admin.jpg", :alt => "admin") %>
+		<% end %>
+	</td>
 	<% if current_admin %>
-		<td><%= link_to 'Edit', edit_user_path(user) %></td>
-		<td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+		<td class="administer"><%= link_to '[edit]', edit_user_path(user) %></td>
+		<td class="administer">
+			<% if current_user != user %>
+				<%= link_to '[destroy]', user, confirm: 'Are you sure?', method: :delete %>
+			<% end %>
+		</td>
+		
 	<% end %>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<% if current_admin %>
-	<%= link_to 'New User', new_user_path %>
-<% end %>

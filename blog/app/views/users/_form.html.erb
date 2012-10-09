@@ -15,7 +15,7 @@
     <%= f.label :nick %><br />
     <%= f.text_field :nick %>
   </div>
-  <% if current_admin %>
+  <% if current_admin and current_user != @user %>
 	  <div class="field">
 		<%= f.label :admin %><br />
 		<%= f.check_box :admin %>
@@ -34,4 +34,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  <br/>
 <% end %>

@@ -1,37 +1,46 @@
-<p id="notice"><%= notice %></p>
+<table>
+	<tr>
+		<td class="post_title">
+			<%= @post.title %>
+		</td>
+		<td>
+			- by <%= User.find(@post.user).nick %>
+		</td>
+	</tr>
+</table>
 
-<p>
-  <b>Title:</b>
-  <%= @post.title %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= User.find(@post.user).nick %>
-</p>
-
-<p>
-  <b>Body:</b>
+<p class="post_body">
   <%= @post.body %>
 </p>
 
 <% if current_admin %>
 	<%= link_to 'Edit', edit_post_path(@post) %> |
-	<%= link_to 'Back', posts_path %>
 <% end %>
 
-<h2>Comments</h2>
+<%= link_to 'Back', posts_path %>
+
+<hr/>
 
 <% @post.comments.each do |c| %>
-  <p>
-    <b><%=h User.find(c.user).nick %> said:</b><br />
-    <%= time_ago_in_words(c.created_at) %> ago
-  </p>
 
-  <p>
-    <%=h c.body %>
-  </p>
+<table>
+	<tr>
+		<td class="comment_title">
+			<%=h User.find(c.user).nick %>
+		</td>
+		<td class="comment_info">
+			said <%= time_ago_in_words(c.created_at) %> ago
+		</td>
+	</tr>
+</table>
+
+<p class="comment_body">
+	<%= c.body %>
+</p>
+  
 <% end %>
+
+<hr/>
 
 <% if current_user %>
 	<%= form_for [@post, Comment.new] do |f| %>
