@@ -32,13 +32,24 @@ p .post_body, .comment_body
 	font-style:italic;
 }
 
+#top
+{
+	background: #D3D9F0;
+	width: 100%;
+}
+
 #nav 
 {
 	text-align:right;
 	padding-right: 10px;
 	font-weight:bold;
 	font-style:italic;
-	background: #D3D9F0;
+
+}
+
+#facebook 
+{
+	padding-left: 10px;
 }
 
 #menu 
